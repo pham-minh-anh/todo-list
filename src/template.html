@@ -2,10 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=>, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" width=device-width, initial-scale=1.0">
+    <title>Mem's todo list</title>
 </head>
 <body>
-    <p>The template is working</p>
+    <div class= "sidebar"> 
+        <button class="add_project" command="show-modal" commandfor="prj-dialog">Add a project</button>
+        <dialog class="add_project" id="prj-dialog">
+            <p>Add new project</p>
+            <form>
+                <input type="text" placeholder="project name">
+                <button type="submit" commandfor="prj-dialog" command="close">Close</button>
+            </form>
+        </dialog>
+
+        <div class="project_list">
+        </div>
+    </div>
+    <div class = "container">
+        <div class="header">
+            <button class="add_todo" command="show-modal" commandfor="todo-dialog">Add a todo</button>
+            <dialog class="add_todo" id="todo-dialog">
+                <P>Add a todo</P>
+                <form>
+                    <input type="text" placeholder="title">
+                    <input type="text" placeholder="description">
+                    <input type="text" placeholder="priority">
+                    <input type="text" placeholder="project">
+                    <button type="submit" commandfor="my-dialog" command="close">Close</button>
+                </form>
+            </dialog>
+        </div>
+        <div class="todo_list"></div>
+    </div>
 </body>
 </html>

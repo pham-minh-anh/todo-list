@@ -1,0 +1,8 @@
+/* styles.css */
+body {
+  display: flex;
+}
+
+.todo_items {
+    display: flex;
+}
