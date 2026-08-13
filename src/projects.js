@@ -1,4 +1,4 @@
-import { loadData, saveData } from "./storage";
+import { loadData, saveData } from "./storage.js";
 
 export class Project {
     constructor(name, id = Math.random().toString(36).slice(2)) {
@@ -15,16 +15,16 @@ export function initProjects() {
     projects.length = 0;
 
     const data = loadData("projects");
-    if (data.length === 0) {
+    if (!data.find((project) => (project.id === INBOX_ID))) {
         const inbox = new Project("Inbox", INBOX_ID);
         projects.push(inbox);
-        saveData("projects", projects);
-    } else {
-        for (const project of data) {
-            projects.push(new Project(project.name, project.id));
-        }
-
     }
+
+    for (const project of data) {
+        projects.push(new Project(project.name, project.id));
+    }
+    
+    saveData("projects", projects);
 }
 
 export function addProject(name) {

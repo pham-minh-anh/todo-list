@@ -1,4 +1,4 @@
-import { loadData, saveData } from "./storage";
+import { loadData, saveData } from "./storage.js";
 import {INBOX_ID} from './projects.js' 
 
 export class Todo {
