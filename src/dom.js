@@ -7,32 +7,35 @@ const projectList = document.querySelector(".project_list")
 const container = document.querySelector(".container");
 const todoList = document.querySelector(".todo_list")
 
+function clearChildren(element) {
+    element.replaceChildren();
+}
+
 export function renderProjectList() {
+    clearChildren(projectList);
+
     const projects = getProjectList();
 
     for (const project of projects) {
         const newProject = document.createElement("div");
         newProject.dataset.id = project.id;
 
-        const name = document.createElement("p")
+        const name = document.createElement("button")
         name.textContent = project.name;
         newProject.appendChild(name)
-
+        name.addEventListener("click", () => {renderTodosByProject(project.id)})
         projectList.appendChild(newProject);
     }
 }
 
-addProject("mem");
-addProject("map");
-addProject("hihi");
-addProject("haha");
-
-renderProjectList();
+renderProjectList()
 
 export function renderTodosByProject (projectId) {
+    clearChildren(todoList);
+
     const todosByProject = getTodosByProject(projectId);
 
-    for (const todo of todosByProject){
+    for (const todo of todosByProject) {
         const newTodo = document.createElement("div");
         newTodo.dataset.id = todo.id;
         newTodo.classList.add("todo_items")
@@ -53,9 +56,4 @@ export function renderTodosByProject (projectId) {
     }
 }
 
-addTodo({title: "first todo", dueDate: new Date()});
-addTodo({title: "second todo", dueDate: new Date()});
-addTodo({title: "third todo", dueDate: new Date()});
-addTodo({title: "fourth todo", dueDate: new Date()});
-
-renderTodosByProject(INBOX_ID);
+renderTodosByProject (INBOX_ID);
