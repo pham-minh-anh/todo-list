@@ -1,18 +1,31 @@
-// Handles project related stuff
+import { loadData, saveData } from "./storage";
+
 export class Project {
-    constructor(name) {
+    constructor(name, id = Math.random().toString(36).slice(2)) {
         this.name = name;
+        this.id = id;
     }
-    id = Math.random().toString(36).slice(2);
 }
 
 const projects = []
+export const INBOX_ID = "inbox"; 
 
-const inbox = new Project("Inbox");
 
-projects.push(inbox);
+export function initProjects() {
+    projects.length = 0;
 
-export const INBOX_ID = inbox.id; // Restore must run before this, or inbox creation must be contitional
+    const data = loadData("projects");
+    if (data.length === 0) {
+        const inbox = new Project("Inbox", INBOX_ID);
+        projects.push(inbox);
+        saveData("projects", projects);
+    } else {
+        for (const project of data) {
+            projects.push(new Project(project.name, project.id));
+        }
+
+    }
+}
 
 export function addProject(name) {
     if (name === undefined || !(name = name.trim())) {
@@ -23,6 +36,8 @@ export function addProject(name) {
     }
     const newProject = new Project(name);
     projects.push(newProject);
+    saveData("projects", projects);
+
     return(newProject);
 }
 export function deleteProjectById(id) {
@@ -36,6 +51,8 @@ export function deleteProjectById(id) {
     }
 
     projects.splice(index, 1); 
+    saveData("projects", projects);
+
     return true;
 }
 export function getProjectById(id) {

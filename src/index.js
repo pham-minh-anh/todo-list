@@ -1,18 +1,12 @@
-import { Todo, addTodo, deleteTodoById, getTodoById, getTodosByProject } from "./todos.js";
-import { Project, addProject, deleteProjectById, getProjectById, INBOX_ID } from "./projects.js";
-import { deleteProjectMoveTodosToInbox, deleteProjectAndTodos } from "./app.js";
-import {} from "./dom.js"
+import { initTodos } from "./todos.js";
+import { initProjects, INBOX_ID } from "./projects.js";
+import { renderProjectList, renderTodosByProject} from "./dom.js"
 import "./styles.css";
 
-window.debug = {
-  addTodo,
-  deleteTodoById,
-  getTodoById,
-  getTodosByProject,
-  addProject,
-  deleteProjectById,
-  getProjectById,
-  deleteProjectMoveTodosToInbox,
-  deleteProjectAndTodos,
-  INBOX_ID,
-};
+initProjects();
+
+initTodos();
+
+renderProjectList();
+
+renderTodosByProject(INBOX_ID);

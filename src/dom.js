@@ -2,6 +2,8 @@ import { addTodo, deleteTodoById, getTodoById, getTodosByProject } from "./todos
 import { getProjectList, addProject, getProjectById, INBOX_ID } from "./projects.js";
 import { deleteProjectMoveTodosToInbox, deleteProjectAndTodos } from "./app.js";
 
+let currentProject = INBOX_ID;
+
 const sidebar = document.querySelector(".sidebar");
 const projectList = document.querySelector(".project_list")
 const container = document.querySelector(".container");
@@ -28,8 +30,6 @@ export function renderProjectList() {
     }
 }
 
-renderProjectList()
-
 export function renderTodosByProject (projectId) {
     clearChildren(todoList);
 
@@ -55,5 +55,3 @@ export function renderTodosByProject (projectId) {
         todoList.appendChild(newTodo);
     }
 }
-
-renderTodosByProject (INBOX_ID);
