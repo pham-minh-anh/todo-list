@@ -3,9 +3,7 @@ body {
   display: flex;
 }
 
-.todo_items {
-    display: flex;
-}
+
 
 .todo_list {
   display: flex;
