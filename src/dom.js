@@ -8,7 +8,7 @@ let editingTodoId = null;
 
 const sidebar = document.querySelector(".sidebar");
 const projectList = document.querySelector(".project_list");
-const container = document.querySelector(".container");
+const container = document.querySelector(".todo_container");
 const todosNew = document.querySelector(".todo_list .new");
 const todoDone = document.querySelector(".todo_list .done");
 const todoDialog = document.querySelector("dialog.add_todo");
@@ -27,50 +27,25 @@ export function renderProjectList() {
     for (const project of projects) {
         const newProject = document.createElement("div");
         newProject.dataset.id = project.id;
+        if (project.id === INBOX_ID) {
+            newProject.classList.add("chosen");
+        }
 
-        newProject.addEventListener("click", () => {
+        newProject.addEventListener("click", (event) => {
             if (event.target.tagName === "BUTTON") {
                 return;
             }
+
+            document.querySelector(".chosen")?.classList.remove("chosen");
+
             renderTodosByProject(project.id);
             currentProject = project.id;
+            newProject.classList.add("chosen");
         })
 
         const name = document.createElement("p")
         name.textContent = project.name;
         newProject.appendChild(name)
-
-        if (project.id !== INBOX_ID) {
-            const deleteButtons = document.createElement("div");
-            newProject.appendChild(deleteButtons);
-
-            const deleteWithTodosButton = document.createElement("button")
-            deleteWithTodosButton.textContent = "Delete with all todos";
-            deleteWithTodosButton.addEventListener("click", () => {
-                deleteProjectAndTodos(project.id);
-                appendSelectProjectOptions();
-                renderProjectList();
-                if (currentProject === project.id) {
-                    renderTodosByProject(INBOX_ID);
-                    currentProject = INBOX_ID;
-                } 
-            })
-            deleteButtons.appendChild(deleteWithTodosButton);
-
-            const deleteMoveTodosButton = document.createElement("button")
-            deleteMoveTodosButton.textContent = "Delete and move all todos to Inbox";
-            deleteMoveTodosButton.addEventListener("click", () => {
-                deleteProjectMoveTodosToInbox(project.id);
-                appendSelectProjectOptions();
-                renderProjectList();
-                if (currentProject === project.id) {
-                    renderTodosByProject(INBOX_ID);
-                    currentProject = INBOX_ID;
-                }
-            })
-            deleteButtons.appendChild(deleteMoveTodosButton);
-
-        }
 
         projectList.appendChild(newProject);
     }
@@ -168,6 +143,38 @@ export function renderTodosByProject (projectId) {
                 newTodo.appendChild(description);
             }
         })
+    }
+
+    const deleteButtons = document.querySelector(".delete_buttons");
+
+    if (projectId !== INBOX_ID) {
+        deleteButtons.replaceChildren();
+
+        const deleteWithTodosButton = document.createElement("button")
+        deleteWithTodosButton.textContent = "Delete project with all todos";
+        deleteWithTodosButton.addEventListener("click", () => {
+            deleteProjectAndTodos(projectId);
+            appendSelectProjectOptions();
+            renderProjectList();
+            if (currentProject === projectId) {
+                renderTodosByProject(INBOX_ID);
+                currentProject = INBOX_ID;
+            } 
+        })
+        deleteButtons.appendChild(deleteWithTodosButton);
+
+        const deleteMoveTodosButton = document.createElement("button")
+        deleteMoveTodosButton.textContent = "Delete project and move all todos to Inbox";
+        deleteMoveTodosButton.addEventListener("click", () => {
+            deleteProjectMoveTodosToInbox(projectId);
+            appendSelectProjectOptions();
+            renderProjectList();
+            renderTodosByProject(INBOX_ID);
+        })
+        deleteButtons.appendChild(deleteMoveTodosButton);
+
+    } else {
+        deleteButtons.replaceChildren();
     }
 }
 

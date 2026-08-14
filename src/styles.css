@@ -1,10 +1,134 @@
 /* styles.css */
-body {
-  display: flex;
+
+html {
+  --main-bg-color: rgb(236, 215, 53);
 }
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-bg-color);
+}
+
+button {
+  border: none;
+  background-color: var(--main-bg-color);
+  color: rgb(60, 60, 60);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.container {
+  background-color: white;
+  display: flex;
+  gap: 40px;
+  margin: 60px auto;
+  padding: 10px;
+  border: 10px outset black;
+  border-radius: 20px;
+  box-shadow: 20px 40px 10px 2px rgb(0, 0, 0, 0.55);
+}
+.sidebar {
+  border-right: 2px dashed rgb(220, 220, 220);
+  padding: 50px 20px 50px 50px;
+  width: 300px;
+}
+
+.todo_container {
+  padding: 50px 50px 50px 10px;
+}
 
 .todo_list {
   display: flex;
 }
+
+.todo_list > div {
+  width: 300px;
+}
+
+.todo_list > div > div {
+  padding: 5px;
+  border: 1px dashed var(--main-bg-color);
+  border-radius: 5px;
+  margin: 20px 10px;
+}
+
+.todo_list p {
+  margin: 5px 2px;
+}
+
+.todo_list p:first-child {
+  font-weight: bold;
+}
+
+.todo_list button {
+  margin: 2px;
+}
+
+.delete_buttons {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px
+}
+
+.delete_buttons > button {
+  background-color: rgb(241, 118, 101);
+  color: black;
+}
+
+.chosen {
+  background: rgb(242, 242, 242);
+}
+
+h2 {
+  margin: 30px 0px 15px;
+}
+
+.project_list > div {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 17px;
+}
+
+
+
+.project_list button {
+  margin: 2px;
+  padding: 2px;
+  font-size: 12px;
+}
+
+dialog {
+  margin: auto;
+  padding: 20px;
+  border: 5px dashed black;
+  border-radius: 5px;
+}
+
+dialog > * {
+  margin: 15px;
+}
+
+dialog > p {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+form section {
+  margin: 10px auto;
+}
+
+input {
+  outline-color: #6c90d8;
+  border-radius: 3px;
+  padding: 3px 5px;
+}
+

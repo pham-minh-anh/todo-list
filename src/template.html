@@ -6,61 +6,66 @@
     <title>Mem's todo list</title>
 </head>
 <body>
-    <div class= "sidebar"> 
-        <button class="add_project" command="show-modal" commandfor="prj-dialog">Add a project</button>
-        <dialog class="add_project" id="prj-dialog">
-            <p>Add new project</p>
-            <form>
-                <input name="name" type="text" placeholder="project name" required>
-                <button type="submit">Submit</button>
-            </form>
-            <button commandfor="prj-dialog" command="close">Close</button>
-        </dialog>
-        <p>Projects</p>
-        <div class="project_list"></div>
-    </div>
-    <div class = "container">
-        <div class="header">
-            <button class="add_todo" command="show-modal" commandfor="todo-dialog">Add a todo</button>
-            <dialog class="add_todo" id="todo-dialog">
-                <p></p>
+    <div class="container">
+        <div class= "sidebar"> 
+            <button class="add_project" command="show-modal" commandfor="prj-dialog">Add a project</button>
+            <dialog class="add_project" id="prj-dialog">
+                <p>Add new project</p>
                 <form>
-                    <section>
-                        <label for="title">Title *</label>
-                        <input name="title" id="title" type="text" required>
-                    </section>
-                    <section>
-                        <label for="description">Description</label>
-                        <input name="description" id="description" type="text">
-                    </section>
-                    <section>
-                        <label for="dueDate">Due Date</label>
-                        <input name="dueDate" id="dueDate" type="date">
-                    </section>
-                    <section>
-                        <label for="priority">Priority</label>
-                        <select name="priority" id="priority">
-                            <option value="0">Medium</option>
-                            <option value="-1">Low</option>
-                            <option value="1">High</option>
-                        </select>
-                    </section>
-                    <section>
-                        <label for="projectId">Project</label>
-                        <select name="projectId" id="projectId">
-                        </select>
-                    </section>
+                    <input name="name" type="text" placeholder="project name" required>
                     <button type="submit">Submit</button>
                 </form>
-                <button commandfor="todo-dialog" command="close">Close</button>
+                <button commandfor="prj-dialog" command="close">Close</button>
             </dialog>
+            <h2>Projects</h2>
+            <div class="project_list"></div>
         </div>
+        <div class = "todo_container">
+            <div class="header">
+                <button class="add_todo">Add a todo</button>
+                <dialog class="add_todo" id="todo-dialog">
+                    <p></p>
+                    <form>
+                        <section>
+                            <label for="title">Title *</label>
+                            <input name="title" id="title" type="text" required>
+                        </section>
+                        <section>
+                            <label for="description">Description</label>
+                            <input name="description" id="description" type="text">
+                        </section>
+                        <section>
+                            <label for="dueDate">Due Date</label>
+                            <input name="dueDate" id="dueDate" type="date">
+                        </section>
+                        <section>
+                            <label for="priority">Priority</label>
+                            <select name="priority" id="priority">
+                                <option value="0">Medium</option>
+                                <option value="-1">Low</option>
+                                <option value="1">High</option>
+                            </select>
+                        </section>
+                        <section>
+                            <label for="projectId">Project</label>
+                            <select name="projectId" id="projectId">
+                            </select>
+                        </section>
+                        <button type="submit">Submit</button>
+                    </form>
+                    <button commandfor="todo-dialog" command="close">Close</button>
+                </dialog>
+            </div>
 
-        <p>Todos</p>
-        <div class="todo_list">
-            <div class="new"></div>
-            <div class="done"></div>
+            <h2>Todos</h2>
+            <div class="todo_list">
+                <div class="new"></div>
+                <div class="done"></div>
+            </div>
+            <div class="delete_buttons"></div>
         </div>
     </div>
+
+    <h1>Mem's Todo List</h1>
 </body>
 </html>

@@ -17,7 +17,7 @@ export class Todo {
         saveData("todos", todos);
         
     }
-    updateFields({title, description, dueDate, priority}) {
+    updateFields({title, description, dueDate, priority, projectId}) {
         if (title !== undefined && (title = title.trim())) {
             this.title = title;
         }
@@ -29,6 +29,9 @@ export class Todo {
         }
         if (priority !== undefined) {
             this.priority = priority;
+        }
+        if (projectId !== undefined) {
+            this.projectId = projectId;
         }
         saveData("todos", todos);
     }
