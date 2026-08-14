@@ -5,9 +5,10 @@ import { deleteProjectMoveTodosToInbox, deleteProjectAndTodos } from "./app.js";
 let currentProject = INBOX_ID;
 
 const sidebar = document.querySelector(".sidebar");
-const projectList = document.querySelector(".project_list")
+const projectList = document.querySelector(".project_list");
 const container = document.querySelector(".container");
-const todoList = document.querySelector(".todo_list")
+const todosNew = document.querySelector(".todo_list .new");
+const todoDone = document.querySelector(".todo_list .done");
 
 function clearChildren(element) {
     element.replaceChildren();
@@ -31,7 +32,8 @@ export function renderProjectList() {
 }
 
 export function renderTodosByProject (projectId) {
-    clearChildren(todoList);
+    clearChildren(todosNew);
+    clearChildren(todoDone);
 
     const todosByProject = getTodosByProject(projectId);
 
@@ -64,7 +66,11 @@ export function renderTodosByProject (projectId) {
             renderTodosByProject(currentProject);
         })
 
-        todoList.appendChild(newTodo);
+        if (todo.done) {
+            todoDone.appendChild(newTodo);
+        } else {
+            todosNew.appendChild(newTodo);
+        }
     }
 }
 
