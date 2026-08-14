@@ -1,6 +1,7 @@
 import { addTodo, toggleDoneById, deleteTodoById, getTodoById, getTodosByProject } from "./todos.js";
 import { getProjectList, addProject, getProjectById, INBOX_ID } from "./projects.js";
 import { deleteProjectMoveTodosToInbox, deleteProjectAndTodos } from "./app.js";
+import { checkOverdue, compareDatesAscending } from "./date.js"
 
 let currentProject = INBOX_ID;
 
@@ -36,6 +37,7 @@ export function renderTodosByProject (projectId) {
     clearChildren(todoDone);
 
     const todosByProject = getTodosByProject(projectId);
+    todosByProject.sort((a, b) => compareDatesAscending(a.dueDate, b.dueDate));
 
     for (const todo of todosByProject) {
         const newTodo = document.createElement("div");
@@ -50,14 +52,18 @@ export function renderTodosByProject (projectId) {
         const dueDate = document.createElement("p")
         if (todo.dueDate !== null) {
             dueDate.textContent = todo.dueDate;
+        } else {
+            dueDate.textContent = "No due date."
         }
         newTodo.appendChild(dueDate);
 
         const done = document.createElement("button");
         if (todo.done) {
-            done.textContent = "done";
+            done.textContent = "Completed";
+        } else if (checkOverdue(todo.dueDate)) {
+            done.textContent = "Overdue";
         } else {
-            done.textContent = "not done";
+            done.textContent = "Pending";
         }
         newTodo.appendChild(done);
 
