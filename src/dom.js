@@ -68,6 +68,16 @@ export function renderTodosByProject (projectId) {
         title.textContent = todo.title;
         newTodo.appendChild(title)
 
+        const priority = document.createElement("p");
+        if (todo.priority < 0) {
+            priority.textContent = "Low priority";
+        } else if (todo.priority === 0) {
+            priority.textContent = "Medium priority";
+        } else {
+            priority.textContent = "High priority";
+        }
+        newTodo.appendChild(priority);
+
         const description = document.createElement("p");
         description.classList.add("description")
         description.textContent = todo.description;
